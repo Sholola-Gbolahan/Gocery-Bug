@@ -1,17 +1,16 @@
 import React from "react"
 import { useState } from "react"
 
-export const Form = () => {
+export const Form = ({ addItem }) => {
   const [newItemName, setNewItemName] = useState("")
 
   const handleSubmit = (e) => {
     e.preventDefault()
     console.log(newItemName)
 
-    if (!newItemName) {
-      alert("Form field cannot be empty")
-      return
-    }
+    if (!newItemName) return
+
+    addItem(newItemName)
 
     setNewItemName("")
   }
