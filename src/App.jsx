@@ -21,7 +21,7 @@ const setLocalStorage = (items) => {
 const defaultList = JSON.parse(localStorage.getItem("list") || "[]")
 
 const App = () => {
-  getLocalStorage()
+  // getLocalStorage()
 
   const [items, setItems] = useState(defaultList)
 
@@ -41,11 +41,26 @@ const App = () => {
     setItems(newItems)
     setLocalStorage(newItems)
   }
+
+  const editItem = (itemId) => {
+    const newItems = items.map((item) => {
+      if (item.id === itemId) {
+        //The idea approach is to copy the exiting value and create a new one.
+        const newItem = { ...item, completed: !item.completed }
+        return newItem
+      }
+      return item
+    })
+
+    setItems(newItems)
+    setLocalStorage(newItems)
+  }
+
   return (
     <div>
       <section className="section-center">
         <Form addItem={addItem} />
-        <Items items={items} removeItem={removeItem} />
+        <Items items={items} removeItem={removeItem} editItem={editItem} />
       </section>
     </div>
   )
