@@ -1,7 +1,8 @@
 import React from "react"
 import { useState } from "react"
+import { toast } from "react-toastify"
 
-export const Form = () => {
+export const Form = ({ addItem }) => {
   const [newItemName, setNewItemName] = useState("")
 
   const handleSubmit = (e) => {
@@ -9,9 +10,11 @@ export const Form = () => {
     console.log(newItemName)
 
     if (!newItemName) {
-      alert("Form field cannot be empty")
+      toast.error("Please provide a valid input")
       return
     }
+
+    addItem(newItemName)
 
     setNewItemName("")
   }
