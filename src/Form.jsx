@@ -1,5 +1,6 @@
 import React from "react"
 import { useState } from "react"
+import { toast } from "react-toastify"
 
 export const Form = ({ addItem }) => {
   const [newItemName, setNewItemName] = useState("")
@@ -8,7 +9,10 @@ export const Form = ({ addItem }) => {
     e.preventDefault()
     console.log(newItemName)
 
-    if (!newItemName) return
+    if (!newItemName) {
+      toast.error("Please provide a valid input")
+      return
+    }
 
     addItem(newItemName)
 

@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import { toast } from "react-toastify"
 
 const SingleItem = ({ item, removeItem, editItem }) => {
   return (
@@ -6,7 +7,10 @@ const SingleItem = ({ item, removeItem, editItem }) => {
       <input
         type="checkbox"
         checked={item.completed}
-        onChange={() => editItem(item.id)}
+        onChange={() => {
+          editItem(item.id)
+          item.completed || toast.success("completed")
+        }}
       />
       <p
         style={{
@@ -17,7 +21,7 @@ const SingleItem = ({ item, removeItem, editItem }) => {
         {item.name}
       </p>
       <button
-        onClick={() => removeItem(item.id)}
+        onClick={() => removeItem(item.id, item.name)}
         type="button"
         className="btn remove-btn"
       >
